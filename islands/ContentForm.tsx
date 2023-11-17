@@ -1,22 +1,22 @@
-import { useState } from "preact/hooks";
+import { signal } from "@preact/signals";
+
 import { tw } from "twind";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 
-interface Props {
-  initialValue?: string;
-}
 
-export default function ContentForm({ initialValue = "" }: Props) {
-  // コンテンツの入力値を保持する
-  const [value, setValue] = useState(initialValue);
-  // プレビュー表示するかの状態を保持する
-  const [preview, setPreview] = useState(false);
+// コンテンツの入力値を保持する
+const value = signal("");
+// プレビュー表示するかの状態を保持する
+const preview = signal(false);
+
+export default function ContentForm() {
 
   /**
    * マークダウンをパースする関数
    */
   const parse = (content: string) => {
+    console.log(content);
     const parsed = marked(content);
     const purified = DOMPurify.sanitize(parsed);
     return purified;
@@ -27,7 +27,7 @@ export default function ContentForm({ initialValue = "" }: Props) {
    */
   const handleChange = (e: Event) => {
     const target = e.target as HTMLTextAreaElement;
-    setValue(target.value);
+    value.value = target.value;
   };
 
   return (
@@ -42,16 +42,16 @@ export default function ContentForm({ initialValue = "" }: Props) {
             type="checkbox"
             id="preview"
             class={tw("ml-2")}
-            checked={preview}
-            onChange={() => setPreview((prev) => !prev)}
+            checked={preview.value}
+            onChange={() => preview.value = !preview.value}
           />
         </label>
       </div>
-      {preview ? (
+      {preview.value ? (
         <div
           id="contents"
           dangerouslySetInnerHTML={{
-            __html: parse(value),
+            __html: parse(value.value),
           }}
         />
       ) : (
@@ -60,8 +60,8 @@ export default function ContentForm({ initialValue = "" }: Props) {
           rows={10}
           class={tw("w-full p-2 border border-gray-300 rounded-md")}
           name="content"
-          value={value}
-          onChange={handleChange}
+          value={value.value}
+          onChange={ handleChange }
         />
       )}
     </div>

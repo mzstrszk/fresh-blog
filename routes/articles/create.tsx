@@ -86,7 +86,7 @@ export default function CreateArticlePage({ data }: PageProps<Data | undefined>)
               <label class={tw("text-gray-500 text-sm")} htmlFor="content">
                 Content
               </label>
-              <ContentForm initialValue={data?.content} />
+              <ContentForm />
               {data?.error?.content && (
                 <p class={tw("text-red-500 text-sm")}>{data.error.content}</p>
               )}
