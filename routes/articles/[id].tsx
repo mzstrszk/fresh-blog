@@ -65,6 +65,15 @@ export default function ArticlePage({ data }: PageProps<Data | null>) {
             />
           </section>
         </article>
+        <br />
+        <div class={tw("flex flex-row-reverse")}>
+          <a
+            href="/"
+            class={tw("bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md")}
+          >
+            Back
+          </a>
+        </div>
       </div>
     </div>
   );
