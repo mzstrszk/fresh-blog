@@ -1,6 +1,6 @@
 # Fresh Blog
 
-DenoのサンプルWebアプリケーション
+Deno、Frewh、PostgreSQLを使ったサンプルWebアプリケーション。
 
 ## 技術スタック
 
@@ -8,7 +8,11 @@ DenoのサンプルWebアプリケーション
 - Deno
 - Fresh
 
-## クラウドサービス
+## サービス
 
 - Deno Deprloy
 - Supabase
+
+## 参考
+
+- https://zenn.dev/azukiazusa/articles/fresh-tutorial
